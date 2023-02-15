@@ -11,6 +11,7 @@ export class EditStudentComponent implements OnInit {
 
   studentOpstine: any;
   @Input() selectedStudent: any;
+
   constructor(private httpKlijent: HttpClient) { }
 
   getOpstine() :void
@@ -20,6 +21,13 @@ export class EditStudentComponent implements OnInit {
     });
   }
 
+  saveChanges()
+  {
+    this.httpKlijent.post(MojConfig.adresa_servera+ "/Studenti/SaveChanges", this.selectedStudent, MojConfig.http_opcije()).subscribe(x=>{
+      // TODO: Refresh student list
+      // testirajWebApi();
+    });
+  }
   ngOnInit(): void {
     this.getOpstine();
   }

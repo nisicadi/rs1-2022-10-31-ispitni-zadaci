@@ -16,7 +16,6 @@ export class StudentiComponent implements OnInit {
   ime_prezime:string = '';
   opstina: string = '';
   studentPodaci: any;
-  studentOpstine: any;
   filter_ime_prezime: boolean;
   filter_opstina: boolean;
 
@@ -33,13 +32,7 @@ export class StudentiComponent implements OnInit {
     });
   }
 
-  getOpstine() :void
-  {
-    this.httpKlijent.get(MojConfig.adresa_servera+ "/Student/GetAll", MojConfig.http_opcije()).subscribe(x=>{
-      this.studentOpstine = x;
-    });
-  }
-
+  //TODO: Refactor so that only one function is used for both filters. This way, one filter cancels our the other.
   filterByName() :void
   {
     if(this.filter_ime_prezime)
