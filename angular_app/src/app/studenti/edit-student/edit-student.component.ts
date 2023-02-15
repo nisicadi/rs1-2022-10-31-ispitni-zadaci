@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {MojConfig} from "../../moj-config";
 
@@ -10,7 +10,7 @@ import {MojConfig} from "../../moj-config";
 export class EditStudentComponent implements OnInit {
 
   studentOpstine: any;
-
+  @Input() selectedStudent: any;
   constructor(private httpKlijent: HttpClient) { }
 
   getOpstine() :void

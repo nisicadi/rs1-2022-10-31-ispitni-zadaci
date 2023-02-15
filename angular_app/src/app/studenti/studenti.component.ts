@@ -20,6 +20,8 @@ export class StudentiComponent implements OnInit {
   filter_ime_prezime: boolean;
   filter_opstina: boolean;
 
+  selectedStudent: any;
+
 
   constructor(private httpKlijent: HttpClient, private router: Router) {
   }
