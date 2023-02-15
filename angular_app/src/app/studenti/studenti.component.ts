@@ -40,6 +40,18 @@ export class StudentiComponent implements OnInit {
       this.testirajWebApi();
   }
 
+  filterByOpstina() :void
+  {
+    this.httpKlijent.get(MojConfig.adresa_servera+ "/Student/GetAll", MojConfig.http_opcije()).subscribe(x=>{
+      this.studentPodaci = x;
+
+      if(this.filter_opstina)
+      {
+        this.studentPodaci = this.studentPodaci.filter((s: any) => s.opstina_rodjenja.description.toLowerCase().startsWith(this.opstina.toLowerCase()));
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.testirajWebApi();
   }
