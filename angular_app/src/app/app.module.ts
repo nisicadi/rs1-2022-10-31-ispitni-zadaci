@@ -14,6 +14,7 @@ import { StudentMaticnaknjigaComponent } from './student-maticnaknjiga/student-m
 import { ChartsModule } from 'ng2-charts';
 import { StudentEditComponent } from './studenti/student-edit/student-edit.component';
 import { PostavkeProfilaComponent } from './postavke-profila/postavke-profila.component';
+import { EditStudentComponent } from './studenti/edit-student/edit-student.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { PostavkeProfilaComponent } from './postavke-profila/postavke-profila.co
     StudentMaticnaknjigaComponent,
     StudentEditComponent,
     PostavkeProfilaComponent,
+    EditStudentComponent,
   ],
   imports: [
     BrowserModule,

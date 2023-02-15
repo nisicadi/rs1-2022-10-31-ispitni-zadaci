@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {MojConfig} from "../../moj-config";
 
 @Component({
   selector: 'app-edit-student',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditStudentComponent implements OnInit {
 
-  constructor() { }
+  studentOpstine: any;
+
+  constructor(private httpKlijent: HttpClient) { }
+
+  getOpstine() :void
+  {
+    this.httpKlijent.get(MojConfig.adresa_servera+ "/Opstina/GetByAll", MojConfig.http_opcije()).subscribe(x=>{
+      this.studentOpstine = x;
+    });
+  }
 
   ngOnInit(): void {
+    this.getOpstine();
   }
 
 }

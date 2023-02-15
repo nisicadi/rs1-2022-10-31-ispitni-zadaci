@@ -1,1 +1,32 @@
-<p>edit-student works!</p>
+<div class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">Novi semestar za </h5>
+        <button type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Ime studenta</label>
+          <input class="form-control" placeholder="Ime studenta"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Prezime studenta</label>
+          <input class="form-control" placeholder="Prezime studenta"/>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Opstina rodjenja</label>
+          <select class="form-control" >
+            <option *ngFor="let opstina of studentOpstine" [value]="opstina.id">{{opstina.opis}}</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" >Close</button>
+        <button type="button" class="btn btn-primary" >Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

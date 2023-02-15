@@ -16,6 +16,7 @@ export class StudentiComponent implements OnInit {
   ime_prezime:string = '';
   opstina: string = '';
   studentPodaci: any;
+  studentOpstine: any;
   filter_ime_prezime: boolean;
   filter_opstina: boolean;
 
@@ -27,6 +28,13 @@ export class StudentiComponent implements OnInit {
   {
     this.httpKlijent.get(MojConfig.adresa_servera+ "/Student/GetAll", MojConfig.http_opcije()).subscribe(x=>{
       this.studentPodaci = x;
+    });
+  }
+
+  getOpstine() :void
+  {
+    this.httpKlijent.get(MojConfig.adresa_servera+ "/Student/GetAll", MojConfig.http_opcije()).subscribe(x=>{
+      this.studentOpstine = x;
     });
   }
 
