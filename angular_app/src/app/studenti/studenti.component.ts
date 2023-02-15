@@ -30,6 +30,16 @@ export class StudentiComponent implements OnInit {
     });
   }
 
+  filterByName() :void
+  {
+    if(this.filter_ime_prezime)
+      this.httpKlijent.get(MojConfig.adresa_servera+ "/Student/GetAll?ime_prezime=" + this.ime_prezime, MojConfig.http_opcije()).subscribe(x=>{
+        this.studentPodaci = x;
+      });
+    else
+      this.testirajWebApi();
+  }
+
   ngOnInit(): void {
     this.testirajWebApi();
   }
