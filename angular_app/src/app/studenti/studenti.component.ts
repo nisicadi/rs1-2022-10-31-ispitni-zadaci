@@ -18,6 +18,8 @@ export class StudentiComponent implements OnInit {
   studentPodaci: any;
   filter_ime_prezime: boolean;
   filter_opstina: boolean;
+  selectedStudent: any;
+  opstine: any;
 
 
   constructor(private httpKlijent: HttpClient, private router: Router) {
@@ -27,6 +29,13 @@ export class StudentiComponent implements OnInit {
   {
     this.httpKlijent.get(MojConfig.adresa_servera+ "/Student/GetAll", MojConfig.http_opcije()).subscribe(x=>{
       this.studentPodaci = x;
+    });
+  }
+
+  getOpstine() :void
+  {
+    this.httpKlijent.get(MojConfig.adresa_servera+ "/Opstina/GetByAll", MojConfig.http_opcije()).subscribe(x=>{
+      this.opstine = x;
     });
   }
 
@@ -48,6 +57,29 @@ export class StudentiComponent implements OnInit {
 
   ngOnInit(): void {
     this.testirajWebApi();
+    this.getOpstine();
   }
 
+  saveChanges() {
+    var student = {
+      id: this.selectedStudent.id,
+      ime: this.selectedStudent.ime,
+      prezime: this.selectedStudent.prezime,
+      opstina_rodjenja_id: this.selectedStudent.opstina_rodjenja_id
+    }
+    this.httpKlijent.post(MojConfig.adresa_servera+ "/Student/SaveChanges", student, MojConfig.http_opcije()).subscribe(x=>{
+      this.getFilteredResults();
+    });
+
+    this.selectedStudent = null;
+  }
+
+  addNewStudent() {
+    this.selectedStudent = {
+      id: 0,
+      ime: this.filter_ime_prezime ? this.ime_prezime[0].toUpperCase() + this.ime_prezime.substr(1).toLowerCase() : '',
+      prezime: '',
+      opstina_rodjenja_id: 2
+    }
+  }
 }

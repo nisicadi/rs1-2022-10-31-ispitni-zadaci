@@ -39,5 +39,28 @@ namespace FIT_Api_Examples.Modul2.Controllers
             return data.Take(100).ToList();
         }
 
+        [HttpPost]
+        public ActionResult<StudentAddVM> SaveChanges(StudentAddVM student)
+        {
+            Student tempStudent;
+            if(student.id == 0)
+            {
+                tempStudent = new Student();
+                _dbContext.Student.Add(tempStudent);
+            }
+            else
+            {
+                tempStudent = _dbContext.Student.Find(student.id);
+            }
+
+            tempStudent.ime = student.ime;
+            tempStudent.prezime = student.prezime;
+            tempStudent.opstina_rodjenja_id = student.opstina_rodjenja_id;
+
+            _dbContext.SaveChanges();
+
+            return Ok();
+        }
+
     }
 }
