@@ -14,7 +14,7 @@ declare function porukaError(a: string):any;
 export class StudentMaticnaknjigaComponent implements OnInit {
 
   constructor(private httpKlijent: HttpClient, private route: ActivatedRoute) {}
-  showModal: false;
+  showModal: boolean;
   studentId: number;
 
   maticnaKnjigaPodaci: any;
@@ -38,6 +38,7 @@ export class StudentMaticnaknjigaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.showModal = false;
     this.route.params.subscribe(s=> {
       this.studentId = +s["id"];
     })
