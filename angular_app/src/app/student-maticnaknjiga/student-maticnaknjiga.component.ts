@@ -20,10 +20,10 @@ export class StudentMaticnaknjigaComponent implements OnInit {
   maticnaKnjigaPodaci: any;
   akGodine: any;
   semestarDatum: any;
-  semestarAkGodina: any;
-  semestarGod: any;
-  semestarCijena: any;
-  semestarObnova: any;
+  semestarAkGodina: number;
+  semestarGod: number;
+  semestarCijena: number;
+  semestarObnova: boolean;
 
   ovjeriLjetni(s:any) {
 
@@ -59,15 +59,25 @@ export class StudentMaticnaknjigaComponent implements OnInit {
   }
 
   saveChanges() {
+    this.maticnaKnjigaPodaci.akGodine
+
+    this.maticnaKnjigaPodaci.akGodine.forEach(function(item: any){
+      console.log(item);
+    });
+    return;
+
     let semestar = {
       godinaStudija: this.semestarGod,
       isObnova: this.semestarObnova,
-      datumUpisZimski: this.semestarDatum,
-      upisAkGodID: +this.semestarAkGodina
+      datumUpisaZimskog: this.semestarDatum,
+      akademskaGodinaId: this.semestarAkGodina,
+      studentId: this.studentId,
+      cijenaSkolarine: this.semestarCijena
     }
 
-    this.httpKlijent.get(MojConfig.adresa_servera+ "/AkademskeGodine/SaveChanges", MojConfig.http_opcije()).subscribe(x=>{
-      this.getAkademskeGodine();
+    console.log(semestar)
+    this.httpKlijent.post(MojConfig.adresa_servera+ "/MaticnaKnjiga/SaveChanges", semestar, MojConfig.http_opcije()).subscribe(x=>{
+      this.getmaticnaKnjigaPodaci(this.studentId);
     });
 
     this.showModal = false;

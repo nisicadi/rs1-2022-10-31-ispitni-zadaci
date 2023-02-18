@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Emin\\Documents\\GitHub\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj": {}
+    "C:\\Users\\Adi\\Desktop\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Emin\\Documents\\GitHub\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj": {
+    "C:\\Users\\Adi\\Desktop\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Emin\\Documents\\GitHub\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj",
+        "projectUniqueName": "C:\\Users\\Adi\\Desktop\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj",
         "projectName": "FIT_Api_Examples",
-        "projectPath": "C:\\Users\\Emin\\Documents\\GitHub\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj",
-        "packagesPath": "C:\\Users\\Emin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Emin\\Documents\\GitHub\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\obj\\",
+        "projectPath": "C:\\Users\\Adi\\Desktop\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj",
+        "packagesPath": "C:\\Users\\Adi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Adi\\Desktop\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Emin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Adi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -94,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

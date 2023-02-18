@@ -4,12 +4,12 @@ using FIT_Api_Examples.Modul3_MaticnaKnjiga.Models;
 using FIT_Api_Examples.Modul3_MaticnaKnjiga.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace FIT_Api_Examples.Modul3_MaticnaKnjiga.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     [Route("[controller]/[action]")]
     public class MaticnaKnjigaController : ControllerBase
@@ -47,7 +47,30 @@ namespace FIT_Api_Examples.Modul3_MaticnaKnjiga.Controllers
                 studentId = student.id
             };
 
-            return response;
+            return Ok(response);
+        }
+
+        [HttpPost]
+        public ActionResult<UpisAkGodinaAddVM> SaveChanges(UpisAkGodinaAddVM upis)
+        {
+            if (!HttpContext.GetLoginInfo().isLogiran)
+                return BadRequest("nije logiran");
+
+            UpisAkGodina novaAkGodina = new UpisAkGodina
+            {
+                akademskaGodinaId = upis.akademskaGodinaId,
+                cijenaSkolarine = upis.cijenaSkolarine,
+                datumUpisaZimskog = upis.datumUpisaZimskog,
+                isObnova = upis.isObnova,
+                studentId = upis.studentId,
+                evidentiraoKorisnikId = HttpContext.GetLoginInfo().korisnickiNalog.id,
+                datumOvjereZimskog = DateTime.Now
+            };
+
+            _dbContext.UpisAkGodina.Add(novaAkGodina);
+            _dbContext.SaveChanges();
+
+            return Ok();
         }
     }
 }

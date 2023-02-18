@@ -73,27 +73,27 @@
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Datum</label>
-          <input class="form-control" type="date"  placeholder="Datum" [value]="semestarDatum">
+          <input class="form-control" type="date"  placeholder="Datum" [(ngModel)]="semestarDatum">
         </div>
         <div class="mb-3">
           <label class="form-label">Godina studija</label>
-          <input class="form-control" placeholder="Godina studija" [value]="semestarGod"/>
+          <input type="number" class="form-control" placeholder="Godina studija" [(ngModel)]="semestarGod"/>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Ak godina</label>
-          <select class="form-control" [value]="semestarAkGodina">
+          <select class="form-control" [(ngModel)]="semestarAkGodina">
             <option *ngFor="let o of akGodine" [value]="o.id">{{o.opis}}</option>
           </select>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Cijena školarine</label>
-          <input class="form-control"  placeholder="Cijena školarine" [value]="semestarCijena"/>
+          <input type="number" class="form-control"  placeholder="Cijena školarine" [(ngModel)]="semestarCijena"/>
         </div>
 
         <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input"  placeholder="Obnova godine" [value]="semestarObnova" />
+          <input type="checkbox" class="form-check-input"  placeholder="Obnova godine" [(ngModel)]="semestarObnova" />
           <label class="form-check-label" >Obnova godine</label>
         </div>
 
