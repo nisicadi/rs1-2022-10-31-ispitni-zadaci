@@ -5,21 +5,21 @@
   <div class="mb-3 row">
     <label class="col-sm-2 col-form-label">Student ID</label>
     <div class="col-sm-4">
-      <input  disabled class="form-control" >
+      <input [value]="studentId" disabled class="form-control" >
     </div>
   </div>
 
   <div class="mb-3 row">
       <label class="col-sm-2 col-form-label">Student ime</label>
         <div class="col-sm-4">
-      <input class="form-control" >
+      <input [value]="maticnaKnjigaPodaci?.ime" disabled class="form-control" >
     </div>
   </div>
 
   <div class="mb-3 row">
       <label class="col-sm-2 col-form-label">Student prezime</label>
         <div class="col-sm-4">
-      <input class="form-control" >
+      <input [value]="maticnaKnjigaPodaci?.prezime" disabled class="form-control" >
     </div>
   </div>
 
@@ -40,17 +40,17 @@
   </thead>
 
   <tbody>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <tr *ngFor="let x of maticnaKnjigaPodaci?.akGodine">
+    <td>{{x.upisAkGodID}}</td>
+    <td>{{x.akGodOpis}}</td>
+    <td>{{x.godinaStudija}}</td>
+    <td>{{x.isObnova}}</td>
     <td>
-      <input> |
-      <input>
+      <input [value]="x.datumUpisZimski" disabled> |
+      <input [value]="x.datumOvjeraZimski" disabled>
     </td>
 
-    <td></td>
+    <td>{{x.evidentiraoKorisnik}}</td>
     <td>
       <a class="btn btn-link">Ovjeri zimski semestar </a> <br>
 
@@ -63,12 +63,12 @@
 </div>
 
 
-<div class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+<div *ngIf="showModal" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLiveLabel">Novi semestar za </h5>
-        <button type="button" class="btn-close" aria-label="Close"></button>
+        <button (click)="showModal = false" type="button" class="btn-close" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
@@ -99,7 +99,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" >Close</button>
+        <button (click)="showModal = false" type="button" class="btn btn-secondary" >Close</button>
         <button type="button" class="btn btn-primary" >Save changes</button>
       </div>
     </div>

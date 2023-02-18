@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FIT_Api_Examples.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230216192616_Init")]
+    [Migration("20230218164056_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -249,6 +249,40 @@ namespace FIT_Api_Examples.Migrations
                     b.ToTable("PrijavaIspita");
                 });
 
+            modelBuilder.Entity("FIT_Api_Examples.Modul3_MaticnaKnjiga.Models.UpisAkGodina", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("akademskaGodinaId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("cijenaSkolarine")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("datumUpisaZimskog")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("godinaStudija")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isObnova")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("studentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("akademskaGodinaId");
+
+                    b.HasIndex("studentId");
+
+                    b.ToTable("UpisAkGodina");
+                });
+
             modelBuilder.Entity("FIT_Api_Examples.Modul2.Models.Nastavnik", b =>
                 {
                     b.HasBaseType("FIT_Api_Examples.Modul0_Autentifikacija.Models.KorisnickiNalog");
@@ -368,6 +402,25 @@ namespace FIT_Api_Examples.Migrations
                     b.Navigation("Ispit");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("FIT_Api_Examples.Modul3_MaticnaKnjiga.Models.UpisAkGodina", b =>
+                {
+                    b.HasOne("FIT_Api_Examples.Modul2.Models.AkademskaGodina", "akademskaGodina")
+                        .WithMany()
+                        .HasForeignKey("akademskaGodinaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FIT_Api_Examples.Modul3_MaticnaKnjiga.Models.Student", "student")
+                        .WithMany()
+                        .HasForeignKey("studentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("akademskaGodina");
+
+                    b.Navigation("student");
                 });
 
             modelBuilder.Entity("FIT_Api_Examples.Modul2.Models.Nastavnik", b =>

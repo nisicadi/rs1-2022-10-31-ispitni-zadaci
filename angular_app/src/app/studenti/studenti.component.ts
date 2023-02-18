@@ -82,4 +82,8 @@ export class StudentiComponent implements OnInit {
       opstina_rodjenja_id: 2
     }
   }
+
+  gotoMaticna(s: any) {
+    this.router.navigate(['/student-maticnaknjiga', s.id]);
+  }
 }

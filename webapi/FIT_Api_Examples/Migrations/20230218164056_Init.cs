@@ -250,6 +250,36 @@ namespace FIT_Api_Examples.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UpisAkGodina",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    studentId = table.Column<int>(type: "int", nullable: false),
+                    akademskaGodinaId = table.Column<int>(type: "int", nullable: false),
+                    datumUpisaZimskog = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    godinaStudija = table.Column<int>(type: "int", nullable: false),
+                    cijenaSkolarine = table.Column<float>(type: "real", nullable: false),
+                    isObnova = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UpisAkGodina", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_UpisAkGodina_AkademskaGodina_akademskaGodinaId",
+                        column: x => x.akademskaGodinaId,
+                        principalTable: "AkademskaGodina",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UpisAkGodina_Student_studentId",
+                        column: x => x.studentId,
+                        principalTable: "Student",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AkademskaGodina_evidentiraoKorisnikid",
                 table: "AkademskaGodina",
@@ -299,13 +329,20 @@ namespace FIT_Api_Examples.Migrations
                 name: "IX_Student_opstina_rodjenja_id",
                 table: "Student",
                 column: "opstina_rodjenja_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UpisAkGodina_akademskaGodinaId",
+                table: "UpisAkGodina",
+                column: "akademskaGodinaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UpisAkGodina_studentId",
+                table: "UpisAkGodina",
+                column: "studentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AkademskaGodina");
-
             migrationBuilder.DropTable(
                 name: "AutentifikacijaToken");
 
@@ -319,7 +356,13 @@ namespace FIT_Api_Examples.Migrations
                 name: "PrijavaIspita");
 
             migrationBuilder.DropTable(
+                name: "UpisAkGodina");
+
+            migrationBuilder.DropTable(
                 name: "Ispit");
+
+            migrationBuilder.DropTable(
+                name: "AkademskaGodina");
 
             migrationBuilder.DropTable(
                 name: "Student");
