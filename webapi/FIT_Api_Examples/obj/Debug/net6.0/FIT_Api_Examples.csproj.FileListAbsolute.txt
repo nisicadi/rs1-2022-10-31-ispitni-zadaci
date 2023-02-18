@@ -83,3 +83,4 @@ C:\Users\Emin\Documents\GitHub\rs1-2022-10-31-ispitni-zadaci\webapi\FIT_Api_Exam
 C:\Users\Emin\Documents\GitHub\rs1-2022-10-31-ispitni-zadaci\webapi\FIT_Api_Examples\obj\Debug\net6.0\FIT_Api_Examples.pdb
 C:\Users\Emin\Documents\GitHub\rs1-2022-10-31-ispitni-zadaci\webapi\FIT_Api_Examples\obj\Debug\net6.0\FIT_Api_Examples.genruntimeconfig.cache
 C:\Users\Emin\Documents\GitHub\rs1-2022-10-31-ispitni-zadaci\webapi\FIT_Api_Examples\obj\Debug\net6.0\ref\FIT_Api_Examples.dll
+C:\Users\Adi\Desktop\rs1-2022-10-31-ispitni-zadaci\webapi\FIT_Api_Examples\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
