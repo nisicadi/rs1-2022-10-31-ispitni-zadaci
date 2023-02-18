@@ -59,13 +59,6 @@ export class StudentMaticnaknjigaComponent implements OnInit {
   }
 
   saveChanges() {
-    this.maticnaKnjigaPodaci.akGodine
-
-    this.maticnaKnjigaPodaci.akGodine.forEach(function(item: any){
-      console.log(item);
-    });
-    return;
-
     let semestar = {
       godinaStudija: this.semestarGod,
       isObnova: this.semestarObnova,
