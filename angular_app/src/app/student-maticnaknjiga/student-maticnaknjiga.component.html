@@ -67,40 +67,40 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabel">Novi semestar za </h5>
+        <h5 class="modal-title" id="exampleModalLiveLabel">Novi semestar za {{maticnaKnjigaPodaci?.ime}} {{maticnaKnjigaPodaci?.prezime}}</h5>
         <button (click)="showModal = false" type="button" class="btn-close" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Datum</label>
-          <input class="form-control" type="date"  placeholder="Datum">
+          <input class="form-control" type="date"  placeholder="Datum" [value]="semestarDatum">
         </div>
         <div class="mb-3">
           <label class="form-label">Godina studija</label>
-          <input class="form-control" placeholder="Godina studija"/>
+          <input class="form-control" placeholder="Godina studija" [value]="semestarGod"/>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Ak godina</label>
-          <select class="form-control" >
-
+          <select class="form-control" [value]="semestarAkGodina">
+            <option *ngFor="let o of akGodine" [value]="o.id">{{o.opis}}</option>
           </select>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Cijena školarine</label>
-          <input class="form-control"  placeholder="Cijena školarine" />
+          <input class="form-control"  placeholder="Cijena školarine" [value]="semestarCijena"/>
         </div>
 
         <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input"  placeholder="Obnova godine" />
-          <label class="form-check-label">Obnova godine</label>
+          <input type="checkbox" class="form-check-input"  placeholder="Obnova godine" [value]="semestarObnova" />
+          <label class="form-check-label" >Obnova godine</label>
         </div>
 
       </div>
       <div class="modal-footer">
         <button (click)="showModal = false" type="button" class="btn btn-secondary" >Close</button>
-        <button type="button" class="btn btn-primary" >Save changes</button>
+        <button (click)="saveChanges()" type="button" class="btn btn-primary" >Save changes</button>
       </div>
     </div>
   </div>
