@@ -51,7 +51,7 @@
     </td>
 
     <td>{{z.korisnik}}</td>
-    <td>
+    <td (click)="pripremiOvjeru(z)">
       <a class="btn btn-link">Ovjeri zimski semestar </a> <br>
 
     </td>
@@ -59,16 +59,42 @@
   </tbody>
 </table>
 
-<button class="form-label" (click)="showModal = true">Upis u zimski semestar</button>
+<button class="form-label" (click)="showUpisModal = true">Upis u zimski semestar</button>
 </div>
 
 
-<div *ngIf="showModal" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+<div *ngIf="showOvjeraModal" class="modal fade show" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ovjera semestra za {{student?.ime}} {{student?.prezime}}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="showOvjeraModal = false"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Datum ovjere</label>
+          <input [(ngModel)]="this.ovjeraDatum" class="form-control" type="date"  placeholder="Datum">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Napomena</label>
+          <input [(ngModel)]="this.ovjeraNapomena" class="form-control" placeholder="Napomena"/>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="showOvjeraModal = false">Close</button>
+        <button (click)="ovjeriSemestar()" class="btn btn-primary" type="button">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showUpisModal" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLiveLabel">Novi semestar za {{student?.ime}} {{student?.prezime}}</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="showModal = false"></button>
+        <button type="button" class="btn-close" aria-label="Close" (click)="showUpisModal = false"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
@@ -99,7 +125,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="showModal = false">Close</button>
+        <button type="button" class="btn btn-secondary" (click)="showUpisModal = false">Close</button>
         <button (click)="dodajZimski()" class="btn btn-primary" type="button">Save changes</button>
       </div>
     </div>

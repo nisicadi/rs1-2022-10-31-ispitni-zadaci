@@ -65,5 +65,20 @@ namespace FIT_Api_Examples.Modul3_MaticnaKnjiga.Controllers
 
             return Ok();
         }
+
+        [HttpPost]
+        public ActionResult Ovjera(Ovjera ovjera)
+        {
+            if (!HttpContext.GetLoginInfo().isLogiran)
+                return BadRequest("nije logiran");
+
+
+            var stara = _dbContext.NovaUpisanaGodina.Find(ovjera.id);
+            stara.datumOvjere = ovjera.datumOvjere;
+            stara.napomenaOvjera = ovjera.napomenaOvjera;
+            _dbContext.SaveChanges();
+
+            return Ok();
+        }
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {MojConfig} from "../moj-config";
 import {HttpClient} from "@angular/common/http";
+import { formatDate } from '@angular/common';
 
 declare function porukaSuccess(a: string):any;
 declare function porukaError(a: string):any;
@@ -17,11 +18,15 @@ export class StudentMaticnaknjigaComponent implements OnInit {
   studentId: number;
   maticnaKnjiga: any;
   akGodine: any;
-  showModal: boolean;
+  showUpisModal: boolean;
   upisDatum: any;
   upisGodina: number;
   upisCijena: number;
   upisObnova: boolean;
+  showOvjeraModal: boolean;
+  ovjeraDatum: any;
+  ovjeraNapomena: any;
+  ovjeraId: number;
 
   constructor(private httpKlijent: HttpClient, private route: ActivatedRoute) {}
   getStudent(id: number)
@@ -81,6 +86,27 @@ export class StudentMaticnaknjigaComponent implements OnInit {
       this.getMaticnaKnjiga(this.studentId);
     });
 
-    this.showModal = false;
+    this.showUpisModal = false;
+  }
+
+  ovjeriSemestar() {
+    var zaOvjeru = {
+      id: this.ovjeraId,
+      studentId: this.studentId,
+      datumOvjere: this.ovjeraDatum,
+      napomenaOvjera: this.ovjeraNapomena
+    }
+
+    this.httpKlijent.post(MojConfig.adresa_servera+ "/MaticnaKnjiga/Ovjera", zaOvjeru, MojConfig.http_opcije()).subscribe(x=>{
+      this.getMaticnaKnjiga(this.studentId);
+    });
+
+    this.showOvjeraModal = false;
+  }
+
+  pripremiOvjeru(z: any) {
+    this.ovjeraDatum = new Date();
+    this.ovjeraId = z.id;
+    this.showOvjeraModal = true;
   }
 }
