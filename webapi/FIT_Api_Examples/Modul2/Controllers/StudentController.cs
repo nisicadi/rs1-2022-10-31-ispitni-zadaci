@@ -39,5 +39,31 @@ namespace FIT_Api_Examples.Modul2.Controllers
             return data.Take(100).ToList();
         }
 
+        [HttpPost]
+        public ActionResult<List<Student>> SaveChanges(StudentAddVM student)
+        {
+            Student newStudent;
+            if(student.id == 0)
+            {
+                newStudent= new Student();
+                newStudent.broj_indeksa = "NOT_SET";
+                newStudent.created_time= DateTime.Now;
+
+                _dbContext.Student.Add(newStudent);
+            }
+            else
+            {
+                newStudent = _dbContext.Student.Find(student.id);
+            }
+
+            newStudent.ime= student.ime;
+            newStudent.prezime= student.prezime;
+            newStudent.opstina_rodjenja_id= student.opstina_rodjenja_id;
+
+            _dbContext.SaveChanges();
+
+            return Ok();
+        }
+
     }
 }

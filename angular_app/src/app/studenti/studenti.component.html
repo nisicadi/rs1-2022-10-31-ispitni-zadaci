@@ -1,12 +1,12 @@
 <p>studenti works!</p>
 
 <div>
-  <input [(ngModel)] = "filter_ime_prezime" type="checkbox"> Filter by <span style="font-weight: bold">Ime / prezime</span> <br>
-  <input [(ngModel)]="ime_prezime"><br>
+  <input [(ngModel)] = "filter_ime_prezime" type="checkbox" (ngModelChange)="getFilteredResults()"> Filter by <span style="font-weight: bold">Ime / prezime</span> <br>
+  <input [(ngModel)]="ime_prezime" (ngModelChange)="getFilteredResults()" [disabled]="!filter_ime_prezime"><br>
   <hr>
 
-  <input [(ngModel)] = "filter_opstina" type="checkbox"> Filter by <span style="font-weight: bold">Opština rođenja</span> <br>
-  <input [(ngModel)]="opstina"><br>
+  <input [(ngModel)] = "filter_opstina" type="checkbox" (ngModelChange)="getFilteredResults()"> Filter by <span style="font-weight: bold">Opština rođenja</span> <br>
+  <input [(ngModel)]="opstina" (ngModelChange)="getFilteredResults()" [disabled]="!filter_opstina"><br>
   <hr>
 </div>
 <table class="table table-warning">
@@ -33,13 +33,45 @@
     <td><img class="profilna-slika" src="{{s.slika_korisnika}}"></td>
     <td>
       <button>Obrisi</button>
-      <button>Uredi</button>
+      <button (click)="selectedStudent = s">Uredi</button>
       <button>Maticna knjiga</button>
     </td>
   </tr>
   </tbody>
 </table>
 
-<button class="form-label">Novi student</button>
+<button (click)="newStudent()" class="form-label">Novi student</button>
+
+<div *ngIf="selectedStudent" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">Dodaj studenta</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="selectedStudent = null"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Ime studenta</label>
+          <input [(ngModel)]="selectedStudent.ime" class="form-control" placeholder="Ime"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Prezime studenta</label>
+          <input [(ngModel)]="selectedStudent.prezime" class="form-control" placeholder="Prezime"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Opstina rodenja</label>
+          <select class="form-control" [(ngModel)]="selectedStudent.opstina_rodjenja_id">
+            <option *ngFor="let o of opstine" [ngValue]="o.id">{{o.opis}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="selectedStudent = null">Close</button>
+        <button (click)="saveChanges()" class="btn btn-primary" type="button">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 

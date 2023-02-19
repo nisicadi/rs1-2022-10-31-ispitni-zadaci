@@ -18,6 +18,8 @@ export class StudentiComponent implements OnInit {
   studentPodaci: any;
   filter_ime_prezime: boolean;
   filter_opstina: boolean;
+  selectedStudent: any;
+  opstine: any;
 
 
   constructor(private httpKlijent: HttpClient, private router: Router) {
@@ -30,8 +32,42 @@ export class StudentiComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.testirajWebApi();
+  getOpstine() :void
+  {
+    this.httpKlijent.get(MojConfig.adresa_servera+ "/Opstina/GetByAll", MojConfig.http_opcije()).subscribe(x=>{
+      this.opstine = x;
+    });
   }
 
+  ngOnInit(): void {
+    this.testirajWebApi();
+    this.getOpstine();
+  }
+
+  getFilteredResults() {
+    if(!this.filter_opstina && !this.filter_ime_prezime)
+      this.testirajWebApi()
+
+
+
+    this.httpKlijent.get(MojConfig.adresa_servera+ "/Student/GetAll?ime_prezime="+(this.filter_ime_prezime ? this.ime_prezime : ''), MojConfig.http_opcije()).subscribe(x=>{
+      this.studentPodaci = x;
+
+      if(this.filter_opstina)
+        this.studentPodaci = this.studentPodaci.filter((s: any) => s.opstina_rodjenja.description.toLowerCase().startsWith(this.opstina));
+    });
+  }
+
+  saveChanges() {
+    this.httpKlijent.post(MojConfig.adresa_servera+ "/Student/SaveChanges", this.selectedStudent, MojConfig.http_opcije()).subscribe(x=>{
+      this.getFilteredResults();
+    });
+  }
+  newStudent() {
+    this.selectedStudent = {
+      ime: this.ime_prezime[0].toUpperCase() + this.ime_prezime.substr(1).toLowerCase(),
+      prezime: '',
+      opstina_rodjenja_id: 2
+    }
+  }
 }
