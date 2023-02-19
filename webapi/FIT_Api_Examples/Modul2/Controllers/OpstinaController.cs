@@ -54,8 +54,11 @@ namespace FIT_Api_Examples.Modul2.Controllers
         }
 
         [HttpGet]
-        public List<CmbStavke> GetByAll()
+        public ActionResult<List<CmbStavke>> GetByAll()
         {
+            if (!HttpContext.GetLoginInfo().isLogiran)
+                return BadRequest("nije logiran");
+
             var data = _dbContext.Opstina
                 .OrderBy(s => s.description)
                 .Select(s => new CmbStavke()

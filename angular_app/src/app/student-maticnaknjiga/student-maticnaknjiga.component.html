@@ -5,21 +5,21 @@
   <div class="mb-3 row">
     <label class="col-sm-2 col-form-label">Student ID</label>
     <div class="col-sm-4">
-      <input  disabled class="form-control" >
+      <input  disabled class="form-control" [value]="this.studentId" disabled>
     </div>
   </div>
 
   <div class="mb-3 row">
       <label class="col-sm-2 col-form-label">Student ime</label>
         <div class="col-sm-4">
-      <input class="form-control" >
+      <input class="form-control" [value]="this.student?.ime" disabled>
     </div>
   </div>
 
   <div class="mb-3 row">
       <label class="col-sm-2 col-form-label">Student prezime</label>
         <div class="col-sm-4">
-      <input class="form-control" >
+      <input class="form-control" [value]="this.student?.prezime" disabled>
     </div>
   </div>
 
@@ -40,17 +40,17 @@
   </thead>
 
   <tbody>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <tr *ngFor="let z of maticnaKnjiga?.listaUpisa">
+    <td>{{z.id}}</td>
+    <td>{{z.akademskaGodina}}</td>
+    <td>{{z.godinaStudija}}</td>
+    <td>{{z.isObnova}}</td>
     <td>
-      <input> |
-      <input>
+      <input [value]="z.datumUpisaZ" disabled> |
+      <input [value]="z.datumOvjere" disabled>
     </td>
 
-    <td></td>
+    <td>{{z.korisnik}}</td>
     <td>
       <a class="btn btn-link">Ovjeri zimski semestar </a> <br>
 
@@ -59,48 +59,48 @@
   </tbody>
 </table>
 
-<button class="form-label">Upis u zimski semestar</button>
+<button class="form-label" (click)="showModal = true">Upis u zimski semestar</button>
 </div>
 
 
-<div class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+<div *ngIf="showModal" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabel">Novi semestar za </h5>
-        <button type="button" class="btn-close" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLiveLabel">Novi semestar za {{student?.ime}} {{student?.prezime}}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="showModal = false"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Datum</label>
-          <input class="form-control" type="date"  placeholder="Datum">
+          <input [(ngModel)]="this.upisDatum" class="form-control" type="date"  placeholder="Datum">
         </div>
         <div class="mb-3">
           <label class="form-label">Godina studija</label>
-          <input class="form-control" placeholder="Godina studija"/>
+          <input [(ngModel)]="this.upisGodina" class="form-control" placeholder="Godina studija"/>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Ak godina</label>
-          <select class="form-control" >
-
+          <select class="form-control" [(ngModel)]="this.upisAkGodina">
+            <option *ngFor="let a of akGodine" [ngValue]="a.id">{{a.opis}}</option>
           </select>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Cijena školarine</label>
-          <input class="form-control"  placeholder="Cijena školarine" />
+          <input [(ngModel)]="this.upisCijena" class="form-control"  placeholder="Cijena školarine" />
         </div>
 
         <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input"  placeholder="Obnova godine" />
+          <input [(ngModel)]="this.upisObnova" type="checkbox" class="form-check-input"  placeholder="Obnova godine" />
           <label class="form-check-label">Obnova godine</label>
         </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" >Close</button>
-        <button type="button" class="btn btn-primary" >Save changes</button>
+        <button type="button" class="btn btn-secondary" (click)="showModal = false">Close</button>
+        <button (click)="dodajZimski()" class="btn btn-primary" type="button">Save changes</button>
       </div>
     </div>
   </div>
