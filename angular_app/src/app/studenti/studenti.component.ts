@@ -74,4 +74,10 @@ export class StudentiComponent implements OnInit {
   gotoMaticna(id: number) {
     this.router.navigate(["/student-maticnaknjiga", id])
   }
+
+  deleteStudent(id: number) {
+    this.httpKlijent.delete(MojConfig.adresa_servera+ "/Student/Delete?id="+id, MojConfig.http_opcije()).subscribe(x=>{
+      this.getFilteredResults();
+    });
+  }
 }

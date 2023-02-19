@@ -32,7 +32,7 @@
     <td>{{s.datum_rodjenja}}</td>
     <td><img class="profilna-slika" src="{{s.slika_korisnika}}"></td>
     <td>
-      <button>Obrisi</button>
+      <button (click)="deleteStudent(s.id)">Obrisi</button>
       <button (click)="selectedStudent = s">Uredi</button>
       <button (click)="gotoMaticna(s.id)">Maticna knjiga</button>
     </td>
