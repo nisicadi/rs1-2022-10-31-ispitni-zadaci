@@ -1,12 +1,12 @@
 <p>studenti works!</p>
 
 <div>
-  <input [(ngModel)] = "filter_ime_prezime" type="checkbox"> Filter by <span style="font-weight: bold">Ime / prezime</span> <br>
-  <input [(ngModel)]="ime_prezime"><br>
+  <input [(ngModel)] = "filter_ime_prezime" type="checkbox" (ngModelChange)="getFiltered()"> Filter by <span style="font-weight: bold">Ime / prezime</span> <br>
+  <input [(ngModel)]="ime_prezime" [disabled]="!filter_ime_prezime" (ngModelChange)="getFiltered()"><br>
   <hr>
 
-  <input [(ngModel)] = "filter_opstina" type="checkbox"> Filter by <span style="font-weight: bold">Opština rođenja</span> <br>
-  <input [(ngModel)]="opstina"><br>
+  <input [(ngModel)] = "filter_opstina" type="checkbox"(ngModelChange)="getFiltered()"> Filter by <span style="font-weight: bold">Opština rođenja</span> <br>
+  <input [(ngModel)]="opstina" [disabled]="!filter_opstina"(ngModelChange)="getFiltered()"><br>
   <hr>
 </div>
 <table class="table table-warning">
@@ -33,13 +33,20 @@
     <td><img class="profilna-slika" src="{{s.slika_korisnika}}"></td>
     <td>
       <button>Obrisi</button>
-      <button>Uredi</button>
+      <button (click)="editStudent(s)">Uredi</button>
       <button>Maticna knjiga</button>
     </td>
   </tr>
   </tbody>
 </table>
 
-<button class="form-label">Novi student</button>
+<button (click)="addStudent()" class="form-label">Novi student</button>
+
+<app-edit-student
+  *ngIf="this.showModal"
+  [selectedStudent]="this.selectedStudent"
+  [studentAction]="this.studentAction"
+  (otvori)="this.otvaranjeAdd($event)"
+></app-edit-student>
 
 

@@ -14,6 +14,7 @@ import { StudentMaticnaknjigaComponent } from './student-maticnaknjiga/student-m
 import { ChartsModule } from 'ng2-charts';
 import { StudentEditComponent } from './studenti/student-edit/student-edit.component';
 import { PostavkeProfilaComponent } from './postavke-profila/postavke-profila.component';
+import { EditStudentComponent } from './studenti/edit-student/edit-student.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,14 +26,15 @@ import { PostavkeProfilaComponent } from './postavke-profila/postavke-profila.co
     StudentMaticnaknjigaComponent,
     StudentEditComponent,
     PostavkeProfilaComponent,
+    EditStudentComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      {path: 'studenti', component: StudentiComponent},
+      {path: 'studenti', component: StudentiComponent, canActivate: [AutorizacijaLoginProvjera]},
       {path: 'login', component: LoginComponent},
       {path: 'registracija', component: RegistracijaComponent},
-      {path: 'student-maticnaknjiga/:id', component: StudentMaticnaknjigaComponent},
+      {path: 'student-maticnaknjiga/:id', component: StudentMaticnaknjigaComponent, canActivate: [AutorizacijaLoginProvjera]},
       {path: 'home', component: HomeComponent, canActivate: [AutorizacijaLoginProvjera]},
       {path: 'postavke-profila', component: PostavkeProfilaComponent, canActivate: [AutorizacijaLoginProvjera]},
       {path: '**', component: NotFoundComponent, canActivate: [AutorizacijaLoginProvjera]},

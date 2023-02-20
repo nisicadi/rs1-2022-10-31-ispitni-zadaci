@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\tmp\\ispit rs1\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj": {}
+    "C:\\Users\\Adi\\Desktop\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj": {}
   },
   "projects": {
-    "C:\\tmp\\ispit rs1\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj": {
+    "C:\\Users\\Adi\\Desktop\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\tmp\\ispit rs1\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj",
+        "projectUniqueName": "C:\\Users\\Adi\\Desktop\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj",
         "projectName": "FIT_Api_Examples",
-        "projectPath": "C:\\tmp\\ispit rs1\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj",
-        "packagesPath": "C:\\Users\\adil\\.nuget\\packages\\",
-        "outputPath": "C:\\tmp\\ispit rs1\\webapi\\FIT_Api_Examples\\obj\\",
+        "projectPath": "C:\\Users\\Adi\\Desktop\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\FIT_Api_Examples.csproj",
+        "packagesPath": "C:\\Users\\Adi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Adi\\Desktop\\rs1-2022-10-31-ispitni-zadaci\\webapi\\FIT_Api_Examples\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\adil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Adi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -84,7 +81,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -96,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
