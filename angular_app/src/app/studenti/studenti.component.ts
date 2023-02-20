@@ -74,4 +74,8 @@ export class StudentiComponent implements OnInit {
     if(!this.showModal)
       this.getFiltered();
   }
+
+  gotoMaticna(id: number) {
+    this.router.navigate(["student-maticnaknjiga", id])
+  }
 }

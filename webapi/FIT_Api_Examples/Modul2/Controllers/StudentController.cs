@@ -42,6 +42,16 @@ namespace FIT_Api_Examples.Modul2.Controllers
             return Ok(data.Take(100).ToList());
         }
 
+        [HttpGet]
+        public ActionResult<Student> GetById(int id)
+        {
+            if (!HttpContext.GetLoginInfo().isLogiran)
+                return BadRequest("nije logiran");
+
+            var response = _dbContext.Student.Find(id);
+            return Ok(response);
+        }
+
         [HttpPost]
         public ActionResult SaveChanges(StudentAddVM student)
         {

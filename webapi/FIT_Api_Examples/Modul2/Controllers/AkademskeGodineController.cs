@@ -2,6 +2,7 @@
 using System.Linq;
 using FIT_Api_Examples.Data;
 using FIT_Api_Examples.Helper;
+using FIT_Api_Examples.Helper.AutentifikacijaAutorizacija;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FIT_Api_Examples.Modul2.Controllers
@@ -19,16 +20,19 @@ namespace FIT_Api_Examples.Modul2.Controllers
         }
 
         [HttpGet]
-        public List<CmbStavke> GetAll_ForCmb()
+        public ActionResult<List<CmbStavke>> GetAll_ForCmb()
         {
-            return _dbContext.AkademskaGodina
+            if (!HttpContext.GetLoginInfo().isLogiran)
+                return BadRequest("nije logiran");
+
+            return Ok(_dbContext.AkademskaGodina
                 .OrderByDescending(x => x.id)
                 .Select(s=>new CmbStavke
                 {
                     opis = s.opis,
                     id = s.id
                 })
-                .ToList();
+                .ToList());
         }
  
     }

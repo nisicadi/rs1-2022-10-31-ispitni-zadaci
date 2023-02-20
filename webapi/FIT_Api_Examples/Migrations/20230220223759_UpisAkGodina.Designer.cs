@@ -4,14 +4,16 @@ using FIT_Api_Examples.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FIT_Api_Examples.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230220223759_UpisAkGodina")]
+    partial class UpisAkGodina
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -272,9 +274,6 @@ namespace FIT_Api_Examples.Migrations
                     b.Property<bool>("isObnova")
                         .HasColumnType("bit");
 
-                    b.Property<int>("korisnikId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ovjeraNapomena")
                         .HasColumnType("nvarchar(max)");
 
@@ -284,8 +283,6 @@ namespace FIT_Api_Examples.Migrations
                     b.HasKey("id");
 
                     b.HasIndex("akademskaGodinaId");
-
-                    b.HasIndex("korisnikId");
 
                     b.HasIndex("studentId");
 
@@ -421,12 +418,6 @@ namespace FIT_Api_Examples.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FIT_Api_Examples.Modul0_Autentifikacija.Models.KorisnickiNalog", "korisnik")
-                        .WithMany()
-                        .HasForeignKey("korisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FIT_Api_Examples.Modul3_MaticnaKnjiga.Models.Student", "student")
                         .WithMany()
                         .HasForeignKey("studentId")
@@ -434,8 +425,6 @@ namespace FIT_Api_Examples.Migrations
                         .IsRequired();
 
                     b.Navigation("akademskaGodina");
-
-                    b.Navigation("korisnik");
 
                     b.Navigation("student");
                 });
