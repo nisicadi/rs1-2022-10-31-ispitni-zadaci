@@ -18,6 +18,10 @@ export class StudentiComponent implements OnInit {
   studentPodaci: any;
   filter_ime_prezime: boolean;
   filter_opstina: boolean;
+  opstine: any;
+  studentAction: string;
+  showModal: boolean;
+  selectedStudent: any;
 
 
   constructor(private httpKlijent: HttpClient, private router: Router) {
@@ -30,8 +34,65 @@ export class StudentiComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.testirajWebApi();
+  getOpstine() :void
+  {
+    this.httpKlijent.get(MojConfig.adresa_servera+ "/Opstina/GetByAll", MojConfig.http_opcije()).subscribe(x=>{
+      this.opstine = x;
+    });
   }
 
+  ngOnInit(): void {
+    this.testirajWebApi();
+    this.getOpstine();
+  }
+
+  getFiltered() {
+    if(!this.filter_opstina && !this.filter_ime_prezime)
+      this.testirajWebApi();
+    else
+    {
+      this.httpKlijent.get(MojConfig.adresa_servera+ "/Student/GetAll?ime_prezime="+this.ime_prezime, MojConfig.http_opcije()).subscribe(x=>{
+        this.studentPodaci = x;
+
+        if(this.filter_opstina)
+          this.studentPodaci = this.studentPodaci.filter((s: any) => s.opstina_rodjenja.description.toLowerCase().startsWith(this.opstina.toLowerCase()));
+      });
+    }
+  }
+
+  saveChanges() {
+    this.httpKlijent.put(MojConfig.adresa_servera+ "/Student/SaveChanges", this.selectedStudent, MojConfig.http_opcije()).subscribe(x=>{
+      this.getFiltered();
+    });
+  }
+
+  dodajStudenta() {
+    this.selectedStudent = {
+      id: 0,
+      ime: this.filter_ime_prezime ? this.ime_prezime[0].toUpperCase() + this.ime_prezime.substr(1).toLowerCase() : '',
+      prezime: '',
+      opstina_rodjenja_id: 2
+    }
+    this.studentAction = 'Dodaj';
+
+    this.showModal = true;
+  }
+
+  urediStudenta(s: any) {
+    this.selectedStudent = s;
+
+    this.studentAction = 'Uredi';
+
+    this.showModal = true;
+  }
+
+  deleteStudent(id: number) {
+    this.httpKlijent.delete(MojConfig.adresa_servera+ "/Student/Delete?id="+id, MojConfig.http_opcije()).subscribe(x=>{
+      this.getFiltered();
+    });
+  }
+
+  gotoMaticna(id: number) {
+    this.router.navigate(['student-maticnaknjiga', id]);
+  }
 }
